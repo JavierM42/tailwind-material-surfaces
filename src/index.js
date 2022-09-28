@@ -2,6 +2,22 @@ const plugin = require("tailwindcss/plugin");
 const chroma = require("chroma-js");
 const { over } = require("color-composite");
 
+const DEFAULT_OPTIONS = {
+  hoverOpacity: 0.08,
+  pressOpacity: 0.12,
+  focusOpacity: 0.12,
+  dragOpacity: 0.16,
+  surfacePrefix: "surface",
+  interactiveSurfacePrefix: "interactive-surface",
+  disabledStyles: {
+    textOpacity: 0.38,
+    backgroundOpacity: 0.12,
+  },
+  transition: {
+    duration: 150,
+  },
+};
+
 // from tailwindcss src/util/flattenColorPalette
 const flattenColorPalette = (colors) =>
   Object.assign(
@@ -27,7 +43,21 @@ const mix = (foregroundColor, backgroundColor, overlayOpacity = 1) => {
   return `rgb(${r}, ${g}, ${b})`;
 };
 
-module.exports = (config) => {
+module.exports = (config, userOptions = {}) => {
+  const {
+    hoverOpacity,
+    pressOpacity,
+    focusOpacity,
+    dragOpacity,
+    surfacePrefix,
+    interactiveSurfacePrefix,
+    disabledStyles,
+    transition,
+  } = {
+    ...DEFAULT_OPTIONS,
+    ...userOptions,
+  };
+
   const colors = flattenColorPalette(config.theme.colors || {});
 
   Object.keys(colors).forEach((colorName) => {
@@ -40,13 +70,14 @@ module.exports = (config) => {
       chroma.valid(color) &&
       chroma.valid(onColor)
     ) {
-      const hoverColor = mix(onColor, color, 0.08);
-      const pressColor = mix(onColor, color, 0.12);
-      const dragColor = mix(onColor, color, 0.16);
+      const hoverColor = mix(onColor, color, hoverOpacity);
+      const pressColor = mix(onColor, color, pressOpacity);
+      const focusColor = mix(onColor, color, focusOpacity);
+      const dragColor = mix(onColor, color, dragOpacity);
 
       colors[`${colorName}-hover`] = hoverColor;
+      colors[`${colorName}-press`] = focusColor;
       colors[`${colorName}-focus`] = pressColor;
-      colors[`${colorName}-press`] = pressColor;
       colors[`${colorName}-drag`] = dragColor;
     }
   });
@@ -70,20 +101,31 @@ module.exports = (config) => {
         let newComponents = {};
 
         materialColors.forEach((colorName) => {
-          newComponents[`.surface-${colorName}`] = {
+          newComponents[`.${surfacePrefix}-${colorName}`] = {
             [`@apply bg-${colorName}`]: {},
             [`@apply text-on-${colorName}`]: {},
           };
 
-          newComponents[`.interactive-surface-${colorName}`] = {
+          newComponents[`.${interactiveSurfacePrefix}-${colorName}`] = {
             [`@apply bg-${colorName}`]: {},
             [`@apply text-on-${colorName}`]: {},
             [`@apply hover:bg-${colorName}-hover`]: {},
             [`@apply active:bg-${colorName}-press`]: {},
             [`@apply focus-visible:bg-${colorName}-focus`]: {},
-            [`@apply transition-colors`]: {},
-            [`@apply disabled:text-on-${colorName}/[0.38]`]: {},
-            [`@apply disabled:bg-on-${colorName}/[0.12]`]: {},
+            ...(transition
+              ? {
+                  [`@apply transition-colors`]: {},
+                  [`@apply duration-${transition.duration}`]: {},
+                }
+              : {}),
+            ...(disabledStyles
+              ? {
+                  [`@apply disabled:text-on-${colorName}/[${disabledStyles.textOpacity}]`]:
+                    {},
+                  [`@apply disabled:bg-on-${colorName}/[${disabledStyles.backgroundOpacity}]`]:
+                    {},
+                }
+              : {}),
           };
         });
 

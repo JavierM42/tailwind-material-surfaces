@@ -43,9 +43,9 @@ module.exports = require('tailwind-material-surfaces')({
       primary:  : '#bbffa3',
       on: {
         primary: '#adsfasdf'
-        ...
+        // ...
       }
-      ...
+      // ...
     }
   }
   ...
@@ -54,6 +54,31 @@ module.exports = require('tailwind-material-surfaces')({
 
 Colors must be provided either as hex values or keywords (no `rgb()` or `hsl()` support yet).
 
+## Customization
+
+If you wish to customize the default values, you may do so by passing an object as the second argument to the plugin with any of these keys and your desired values.
+
+```js
+require('tailwind-material-surfaces')({
+  // tailwind config
+}, {
+  hoverOpacity: 0.08,
+  pressOpacity: 0.12,
+  focusOpacity: 0.12,
+  dragOpacity: 0.16,
+  surfacePrefix: "surface", // for example, change to 'sf' if you like shorter names
+  interactiveSurfacePrefix: "interactive-surface",
+  disabledStyles: {
+    textOpacity: 0.38,
+    backgroundOpacity: 0.12,
+    // pass false instead of this object if you don't want disabled styles
+  },
+  transition: {
+    duration: 150, // transition duration in milliseconds
+    // pass false instead of this object if you don't want any transition
+  },
+});
+```
 ## Why isn't the plugin called in the `plugins` array of `tailwind.config.js`?
 
 `tailwind-mode-aware-colors` modifies your `theme.colors` object to add the new `-hover`, `-press`, `-focus` and `-drag` colors. The Tailwind engine and any other plugins you may be using will then pick those up. Because of that, it needs to wrap your Tailwind configuration and cannot be called in the plugins array.
