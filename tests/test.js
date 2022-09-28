@@ -30,6 +30,38 @@ describe("And there are colors with a defined 'on' color", () => {
     );
   });
 
+  it("Flattens extend color map and adds -hover, -focus, -press and -drag versions for those colors", () => {
+    expect(
+      withMaterialSurfaces({
+        theme: {
+          extend: {
+            colors: {
+              a: "#ff0000",
+              on: {
+                a: "#0000ff",
+              },
+            },
+          },
+        },
+      })
+    ).toEqual(
+      expect.objectContaining({
+        theme: {
+          extend: {
+            colors: {
+              a: "#ff0000",
+              "on-a": "#0000ff",
+              "a-hover": "rgb(235, 0, 20)", // 8% blue over red
+              "a-focus": "rgb(224, 0, 31)", // 12% blue over red
+              "a-press": "rgb(224, 0, 31)", // 12% blue over red
+              "a-drag": "rgb(214, 0, 41)", // 16% blue over red
+            },
+          },
+        },
+      })
+    );
+  });
+
   it("Mixes colors correctly for the supported color syntaxes", () => {
     expect(
       withMaterialSurfaces({

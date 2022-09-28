@@ -55,7 +55,9 @@ module.exports = require('tailwind-material-surfaces')({
 });
 ```
 
-> Colors must be provided either as hex values or keywords (there's no `rgb()` or `hsl()` support yet).
+- You may use `theme.extends.colors` if you want to keep the original Tailwind palette, but the plugin won't work with existing tailwind colors if you only define their corresponding on-color (i.e.: `on-red-200` won't work unless you also overwrite `red-200` in the config).
+
+- Colors must be provided either as hex values or keywords (there's no `rgb()` or `hsl()` support yet).
 
 ## Customization
 

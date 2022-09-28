@@ -58,7 +58,13 @@ module.exports = (config, userOptions = {}) => {
     ...userOptions,
   };
 
-  const colors = flattenColorPalette(config.theme.colors || {});
+  const extendsDefaultColors = !config.theme.colors;
+
+  const colors = flattenColorPalette(
+    extendsDefaultColors
+      ? config.theme.extend.colors || {}
+      : config.theme.colors
+  );
 
   Object.keys(colors).forEach((colorName) => {
     const onColorName = `on-${colorName}`;
@@ -84,7 +90,9 @@ module.exports = (config, userOptions = {}) => {
 
   return {
     ...config,
-    theme: { ...(config.theme || []), colors },
+    theme: extendsDefaultColors
+      ? { ...config.theme, extend: { ...(config.theme.extend || {}), colors } }
+      : { ...(config.theme || []), colors },
     plugins: [
       ...(config.plugins || []),
       plugin(({ addComponents, theme }) => {
