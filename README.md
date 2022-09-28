@@ -24,6 +24,8 @@ The plugin will generate:
   - `primary-drag`, defined as `on-primary` at 16% opacity over `primary`.
 - `interactive-surface-primary` as a shorthand for `bg-primary text-on-primary hover:bg-primary-hover active:bg-primary-press focus:bg-primary-focus disabled:text-primary/[0.38] disabled:bg-primary/[0.12] transition-colors`. These are the Material styles for interactive elements and the main reason to use this plugin.
 
+[Here's a CodeSandbox demo](https://codesandbox.io/s/tailwind-material-surfaces-example-4tr3r3?file=/src/App.js) of the plugin in action.
+
 
 > Note: Even though the `-drag` color is provided, drag styles should be manually implemented (when required), as that cannot be achieved with pure CSS.
 
@@ -41,9 +43,9 @@ module.exports = require('tailwind-material-surfaces')({
   theme: {
     colors: {
       // colors with an 'on' counterpart will generate surfaces
-      primary:  : '#bbffa3',
+      primary:  : '#abcd42',
       on: {
-        primary: '#adsfasdf'
+        primary: '#123123'
         // ...
       }
       // ...
