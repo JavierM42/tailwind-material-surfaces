@@ -2,31 +2,32 @@
 
 [Material Design 3](https://m3.material.io/)'s color system provides a set of guidelines to style buttons and other interactive surfaces.
 
-The guidelines state that for each color that's to be used as a _container color_ of an element, there's a corresponding _on-color_ that will be the default color of content within that element.
+They state that for each color that's to be used as a _container color_ of an element, there's a corresponding _on-color_: the default color of content within that element.
 
-There's also rules that define the [interaction states](https://m3.material.io/foundations/interaction-states) of an interactive element based on its _container color_ and _on-color_.
+There's also rules that define the [interaction states](https://m3.material.io/foundations/interaction-states) of an element based on its container color and on-color.
 
-For each pair of _container color_ and _on-color_ defined in your `tailwind.config.js`, this plugin will generate colors and utilities to easily style surfaces and interactive surfaces.
+For each pair of container color and on-color defined in the Tailwind config, this plugin will generate colors and utilities for both static and interactive surfaces.
 
-This plugin does not build color themes for you, you can do that with [the official theme builder](https://m3.material.io/theme-builder#/custom).
+This plugin does not build color themes for you (you can do that with [the official theme builder](https://m3.material.io/theme-builder#/custom)).
 
 ## Example
 
-Let's say we have a `primary` and `on-primary` color defined in our `tailwind.config.js`.
+Let's say we have the colors `primary` and `on-primary` defined in our Tailwind config file.
 
-This plugin will generate:
+The plugin will generate:
 
 - `surface-primary` as a shorthand for `bg-primary text-on-primary`.
-- some new colors for the interaction states:
-  - `primary-hover`: `on-primary` at 8% opacity over `primary`.
-  - `primary-press`: `on-primary` at 12% opacity over `primary`.
-  - `primary-focus`: `on-primary` at 12% opacity over `primary` (same as `-press`, can be customized if you want a different value).
-  - `primary-drag`: `on-primary` at 16% opacity over `primary`.
-- `interactive-surface-primary` as a shorthand for `bg-primary text-on-primary hover:bg-primary-hover active:bg-primary-press focus:bg-primary-focus disabled:text-primary/[0.38] disabled:bg-primary/[0.12] transition-colors`. These are the Material 3 styles for buttons and other interactive elements, which can save a lot of boilerplate.
+- Some new colors for the interaction states:
+  - `primary-hover`, defined as `on-primary` at 8% opacity over `primary`.
+  - `primary-press`, defined as `on-primary` at 12% opacity over `primary`.
+  - `primary-focus`, defined as `on-primary` at 12% opacity over `primary` (same as `-press`, but can be customized if you want a different value).
+  - `primary-drag`, defined as `on-primary` at 16% opacity over `primary`.
+- `interactive-surface-primary` as a shorthand for `bg-primary text-on-primary hover:bg-primary-hover active:bg-primary-press focus:bg-primary-focus disabled:text-primary/[0.38] disabled:bg-primary/[0.12] transition-colors`. These are the Material styles for interactive elements and the main reason to use this plugin.
 
-> Note: While the `-drag` color is provided, drag styles should be manually implemented (when required), as that cannot be achieved with pure CSS.
 
-## Installation
+> Note: Even though the `-drag` color is provided, drag styles should be manually implemented (when required), as that cannot be achieved with pure CSS.
+
+## How to use it
 
 ```
 npm install --save-dev tailwind-material-surfaces
@@ -48,15 +49,15 @@ module.exports = require('tailwind-material-surfaces')({
       // ...
     }
   }
-  ...
+  // ...
 });
 ```
 
-Colors must be provided either as hex values or keywords (no `rgb()` or `hsl()` support yet).
+> Colors must be provided either as hex values or keywords (there's no `rgb()` or `hsl()` support yet).
 
 ## Customization
 
-If you wish to customize the default values, you may do so by passing an object as the second argument to the plugin with any of these keys and your desired values.
+If you wish to customize the default values, you may do so by passing an object as the second argument to the plugin, with any of these keys and your desired values.
 
 ```js
 require('tailwind-material-surfaces')({
@@ -81,4 +82,4 @@ require('tailwind-material-surfaces')({
 ```
 ## Why isn't the plugin called in the `plugins` array of `tailwind.config.js`?
 
-`tailwind-mode-aware-colors` modifies your `theme.colors` object to add the new `-hover`, `-press`, `-focus` and `-drag` colors. The Tailwind engine and any other plugins you may be using will then pick those up. Because of that, it needs to wrap your Tailwind configuration and cannot be called in the plugins array.
+`tailwind-material-surfaces` modifies your `theme.colors` object to add the new `-hover`, `-press`, `-focus` and `-drag` colors. The Tailwind engine and any other plugins you may be using will then pick those up. Because of that, it needs to wrap your Tailwind configuration and cannot be called in the plugins array.
