@@ -1,0 +1,31 @@
+{
+  "name": "tailwind-material-surfaces",
+  "version": "0.0.1",
+  "description": "TailwindCSS Plugin to generate surfaces and interactive surfaces according to the Material Design 3 guidelines.",
+  "main": "src/index.js",
+  "license": "MIT",
+  "repository": "https://github.com/JavierM42/tailwind-material-surfaces",
+  "scripts": {
+    "test": "jest"
+  },
+  "dependencies": {
+    "chroma-js": "^2.4.2",
+    "color-composite": "^1.0.2"
+  },
+  "peerDependencies": {
+    "tailwindcss": "^3.0.0"
+  },
+  "keywords": [
+    "tailwind",
+    "colors",
+    "color",
+    "material design",
+    "material"
+  ],
+  "devDependencies": {
+    "jest": "^27.2.4",
+    "postcss": "^8.2.4",
+    "tailwindcss": "^3.0.0"
+  },
+  "author": "Javier Morales"
+}
