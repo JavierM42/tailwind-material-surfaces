@@ -47,7 +47,7 @@ module.exports = require('tailwind-material-surfaces')({
   theme: {
     colors: {
       // colors with an 'on' counterpart will generate surfaces
-      primary:  : '#abcd42',
+      primary: '#abcd42',
       on: {
         primary: '#123123'
         // ...
