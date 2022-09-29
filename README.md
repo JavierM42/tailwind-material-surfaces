@@ -1,3 +1,5 @@
+![Banner](https://raw.githubusercontent.com/JavierM42/tailwind-material-surfaces/main/image.png)
+
 # tailwind-material-surfaces
 
 [Material Design 3](https://m3.material.io/)'s color system provides a set of guidelines to style buttons and other interactive surfaces.
@@ -23,6 +25,8 @@ The plugin will generate:
   - `primary-focus`, defined as `on-primary` at 12% opacity over `primary` (same as `-press`, but can be customized if you want a different value).
   - `primary-drag`, defined as `on-primary` at 16% opacity over `primary`.
 - `interactive-surface-primary` as a shorthand for `bg-primary text-on-primary hover:bg-primary-hover active:bg-primary-press focus:bg-primary-focus disabled:text-primary/[0.38] disabled:bg-primary/[0.12] transition-colors`. These are the Material styles for interactive elements and the main reason to use this plugin.
+
+<!-- TODO image -->
 
 [Here's a CodeSandbox demo](https://codesandbox.io/s/tailwind-material-surfaces-example-4tr3r3?file=/src/App.js) of the plugin in action.
 
@@ -84,6 +88,7 @@ require('tailwind-material-surfaces')({
   },
 });
 ```
+
 ## Why isn't the plugin called in the `plugins` array of `tailwind.config.js`?
 
 `tailwind-material-surfaces` modifies your `theme.colors` object to add the new `-hover`, `-press`, `-focus` and `-drag` colors. The Tailwind engine and any other plugins you may be using will then pick those up. Because of that, it needs to wrap your Tailwind configuration and cannot be called in the plugins array.
