@@ -110,7 +110,11 @@ module.exports = (config, userOptions = {}) => {
 
         materialColors.forEach((colorName) => {
           newComponents[`.${surfacePrefix}-${colorName}`] = {
-            [`@apply bg-${colorName}`]: {},
+            ...(surfacePrefix === "bg"
+              ? {}
+              : {
+                  [`@apply bg-${colorName}`]: {},
+                }),
             [`@apply text-on-${colorName}`]: {},
           };
 

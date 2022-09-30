@@ -182,7 +182,7 @@ describe("When specifying user options", () => {
       {
         content: [
           {
-            raw: "bg-a-hover/50 text-a-press border-a-focus shadow-a-drag sf-a isf-a",
+            raw: "text-a-press border-a-focus shadow-a-drag bg-a ibg-a",
           },
         ],
         theme: {
@@ -199,8 +199,8 @@ describe("When specifying user options", () => {
         pressOpacity: 0.08,
         focusOpacity: 0.08,
         dragOpacity: 0.12,
-        surfacePrefix: "sf",
-        interactiveSurfacePrefix: "isf",
+        surfacePrefix: "bg", // the bg value is special
+        interactiveSurfacePrefix: "ibg",
         disabledStyles: {
           textOpacity: 0.2,
           backgroundOpacity: 0.05,
@@ -221,8 +221,9 @@ describe("When specifying user options", () => {
         --tw-border-opacity:1;
         border-color: rgb(235 0 20 / var(--tw-border-opacity))
       }
-      .bg-a-hover\\/50 {
-        background-color: rgb(214 0 41 / 0.5)
+      .bg-a {
+        --tw-bg-opacity: 1;
+        background-color: rgb(255 0 0 / var(--tw-bg-opacity))
       }
       .text-a-press {
         --tw-text-opacity:1;
@@ -241,36 +242,34 @@ describe("When specifying user options", () => {
 
     expect(componentsCSS.replace(/\n|\s|\t/g, "")).toBe(
       `
-      .sf-a {
+      .bg-a {
+        --tw-text-opacity:1;
+        color: rgb(0 0 255 / var(--tw-text-opacity))
+      }
+      .ibg-a {
         --tw-bg-opacity:1;
         background-color: rgb(255 0 0 / var(--tw-bg-opacity));
         --tw-text-opacity:1;
         color: rgb(0 0 255 / var(--tw-text-opacity))
       }
-      .isf-a {
-        --tw-bg-opacity:1;
-        background-color: rgb(255 0 0 / var(--tw-bg-opacity));
-        --tw-text-opacity:1;
-        color: rgb(0 0 255 / var(--tw-text-opacity))
-      }
-      .isf-a:hover {
+      .ibg-a:hover {
         --tw-bg-opacity:1;
         background-color: rgb(214 0 41 / var(--tw-bg-opacity))
       }
-      .isf-a:active {
+      .ibg-a:active {
         --tw-bg-opacity:1;
         background-color: rgb(235 0 20 / var(--tw-bg-opacity))
       }
-      .isf-a:focus-visible {
+      .ibg-a:focus-visible {
         --tw-bg-opacity:1;
         background-color: rgb(235 0 20 / var(--tw-bg-opacity))
       }
-      .isf-a {
+      .ibg-a {
         transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
         transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
         transition-duration: 1000ms
       }
-      .isf-a:disabled {
+      .ibg-a:disabled {
         color: rgb(0 0 255 / 0.2);
         background-color: rgb(0 0 255 / 0.05)
       }

@@ -89,6 +89,8 @@ require('tailwind-material-surfaces')({
 });
 ```
 
+You may use `bg` as the `surfacePrefix` if you wish all `bg-X` classes to also set `color: on-X`. You can then overwrite the text color with `text-` utilities. The text color won't be set if you use `bg-X/<alpha-value>` though. You can use `bg-X bg-opacity-<alpha-value>` instead.
+
 ## Why isn't the plugin called in the `plugins` array of `tailwind.config.js`?
 
 `tailwind-material-surfaces` modifies your `theme.colors` object to add the new `-hover`, `-press`, `-focus` and `-drag` colors. The Tailwind engine and any other plugins you may be using will then pick those up. Because of that, it needs to wrap your Tailwind configuration and cannot be called in the plugins array.
