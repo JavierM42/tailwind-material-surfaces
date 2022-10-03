@@ -1,12 +1,8 @@
 const plugin = require("tailwindcss/plugin");
 const chroma = require("chroma-js");
-const { over } = require("color-composite");
+const getInteractionColors = require("./getInteractionColors");
 
 const DEFAULT_OPTIONS = {
-  hoverOpacity: 0.08,
-  pressOpacity: 0.12,
-  focusOpacity: 0.12,
-  dragOpacity: 0.16,
   surfacePrefix: "surface",
   interactiveSurfacePrefix: "interactive-surface",
   disabledStyles: {
@@ -31,24 +27,8 @@ const flattenColorPalette = (colors) =>
     )
   );
 
-// mix two colors
-const mix = (foregroundColor, backgroundColor, overlayOpacity = 1) => {
-  // TODO check if transparent makes sense
-  const {
-    values: [r, g, b],
-  } = over(
-    chroma(foregroundColor).alpha(overlayOpacity).hex(),
-    backgroundColor
-  );
-  return `rgb(${r}, ${g}, ${b})`;
-};
-
 module.exports = (config, userOptions = {}) => {
   const {
-    hoverOpacity,
-    pressOpacity,
-    focusOpacity,
-    dragOpacity,
     surfacePrefix,
     interactiveSurfacePrefix,
     disabledStyles,
@@ -76,15 +56,16 @@ module.exports = (config, userOptions = {}) => {
       chroma.valid(color) &&
       chroma.valid(onColor)
     ) {
-      const hoverColor = mix(onColor, color, hoverOpacity);
-      const pressColor = mix(onColor, color, pressOpacity);
-      const focusColor = mix(onColor, color, focusOpacity);
-      const dragColor = mix(onColor, color, dragOpacity);
+      const interactionColors = getInteractionColors(
+        color,
+        onColor,
+        userOptions
+      );
 
-      colors[`${colorName}-hover`] = hoverColor;
-      colors[`${colorName}-press`] = focusColor;
-      colors[`${colorName}-focus`] = pressColor;
-      colors[`${colorName}-drag`] = dragColor;
+      colors[`${colorName}-hover`] = interactionColors.hover;
+      colors[`${colorName}-press`] = interactionColors.press;
+      colors[`${colorName}-focus`] = interactionColors.focus;
+      colors[`${colorName}-drag`] = interactionColors.drag;
     }
   });
 
