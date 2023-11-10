@@ -101,6 +101,7 @@ it("Generates the correct CSS", () => {
     ],
     theme: {
       colors: {
+        black: "#000000",
         a: "#ff0000",
         on: {
           a: "#0000ff",
@@ -169,8 +170,8 @@ it("Generates the correct CSS", () => {
         transition-duration: 150ms
       }
       .interactive-surface-a:disabled {
-        color: rgb(0 0 255 / 0.38);
-        background-color: rgb(0 0 255 / 0.12)
+        color: rgb(0 0 0 / 0.38);
+        background-color: rgb(0 0 0 / 0.12)
       }
     `.replace(/\n|\s|\t/g, "")
   );
@@ -187,6 +188,7 @@ describe("When specifying user options", () => {
         ],
         theme: {
           colors: {
+            black: "#000000",
             a: "#ff0000",
             on: {
               a: "#0000ff",
@@ -204,6 +206,7 @@ describe("When specifying user options", () => {
         disabledStyles: {
           textOpacity: 0.2,
           backgroundOpacity: 0.05,
+          colorName: "black",
         },
         transition: {
           duration: 1000,
@@ -270,8 +273,8 @@ describe("When specifying user options", () => {
         transition-duration: 1000ms
       }
       .ibg-a:disabled {
-        color: rgb(0 0 255 / 0.2);
-        background-color: rgb(0 0 255 / 0.05)
+        color: rgb(0 0 0 / 0.2);
+        background-color: rgb(0 0 0 / 0.05)
       }
     `.replace(/\n|\s|\t/g, "")
     );

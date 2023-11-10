@@ -8,6 +8,7 @@ const DEFAULT_OPTIONS = {
   disabledStyles: {
     textOpacity: 0.38,
     backgroundOpacity: 0.12,
+    colorName: "black",
   },
   transition: {
     duration: 150,
@@ -113,9 +114,9 @@ module.exports = (config, userOptions = {}) => {
               : {}),
             ...(disabledStyles
               ? {
-                  [`@apply disabled:text-on-${colorName}/[${disabledStyles.textOpacity}]`]:
+                  [`@apply disabled:text-${disabledStyles.colorName}/[${disabledStyles.textOpacity}]`]:
                     {},
-                  [`@apply disabled:bg-on-${colorName}/[${disabledStyles.backgroundOpacity}]`]:
+                  [`@apply disabled:bg-${disabledStyles.colorName}/[${disabledStyles.backgroundOpacity}]`]:
                     {},
                 }
               : {}),

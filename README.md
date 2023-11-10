@@ -24,14 +24,15 @@ The plugin will generate:
   - `primary-press`, defined as `on-primary` at 12% opacity over `primary`.
   - `primary-focus`, defined as `on-primary` at 12% opacity over `primary` (same as `-press`, but can be customized if you want a different value).
   - `primary-drag`, defined as `on-primary` at 16% opacity over `primary`.
-- `interactive-surface-primary` as a shorthand for `bg-primary text-on-primary hover:bg-primary-hover active:bg-primary-press focus:bg-primary-focus disabled:text-primary/[0.38] disabled:bg-primary/[0.12] transition-colors`. These are the Material styles for interactive elements and the main reason to use this plugin.
+- `interactive-surface-primary` as a shorthand for `bg-primary text-on-primary hover:bg-primary-hover active:bg-primary-press focus:bg-primary-focus disabled:text-black/[0.38] disabled:bg-black/[0.12] transition-colors`. These are the Material styles for interactive elements and the main reason to use this plugin.
 
 <!-- TODO image -->
 
 [Here's a CodeSandbox demo](https://codesandbox.io/s/tailwind-material-surfaces-example-4tr3r3?file=/src/App.js) of the plugin in action.
 
-
 > Note: Even though the `-drag` color is provided, drag styles should be manually implemented (when required), as that cannot be achieved with pure CSS.
+
+> With default settings, make sure to have `black` defined in your Tailwind color palette (it's used for disabled styles).
 
 ## How to use it
 
@@ -42,19 +43,19 @@ npm install --save-dev tailwind-material-surfaces
 ### `tailwind.config.js`
 
 ```js
-module.exports = require('tailwind-material-surfaces')({
+module.exports = require("tailwind-material-surfaces")({
   // your usual config
   theme: {
     colors: {
       // colors with an 'on' counterpart will generate surfaces
-      primary: '#abcd42',
+      primary: "#abcd42",
       on: {
-        primary: '#123123'
+        primary: "#123123",
         // ...
-      }
+      },
       // ...
-    }
-  }
+    },
+  },
   // ...
 });
 ```
@@ -68,25 +69,29 @@ module.exports = require('tailwind-material-surfaces')({
 If you wish to customize the default values, you may do so by passing an object as the second argument to the plugin, with any of these keys and your desired values.
 
 ```js
-require('tailwind-material-surfaces')({
-  // tailwind config
-}, {
-  hoverOpacity: 0.08,
-  pressOpacity: 0.12,
-  focusOpacity: 0.12,
-  dragOpacity: 0.16,
-  surfacePrefix: "surface", // for example, change to 'sf' if you like shorter names
-  interactiveSurfacePrefix: "interactive-surface",
-  disabledStyles: {
-    textOpacity: 0.38,
-    backgroundOpacity: 0.12,
-    // pass false instead of this object if you don't want disabled styles
+require("tailwind-material-surfaces")(
+  {
+    // tailwind config
   },
-  transition: {
-    duration: 150, // transition duration in milliseconds
-    // pass false instead of this object if you don't want any transition
-  },
-});
+  {
+    hoverOpacity: 0.08,
+    pressOpacity: 0.12,
+    focusOpacity: 0.12,
+    dragOpacity: 0.16,
+    surfacePrefix: "surface", // for example, change to 'sf' if you like shorter names
+    interactiveSurfacePrefix: "interactive-surface",
+    disabledStyles: {
+      textOpacity: 0.38,
+      backgroundOpacity: 0.12,
+      colorName: "black", // a color name present in your Tailwind palette
+      // pass false instead of this object if you don't want disabled styles
+    },
+    transition: {
+      duration: 150, // transition duration in milliseconds
+      // pass false instead of this object if you don't want any transition
+    },
+  }
+);
 ```
 
 You may use `bg` as the `surfacePrefix` if you wish all `bg-X` classes to also set `color: on-X`. You can then overwrite the text color with `text-` utilities. The text color won't be set if you use `bg-X/<alpha-value>` though. You can use `bg-X bg-opacity-<alpha-value>` instead.
@@ -94,3 +99,7 @@ You may use `bg` as the `surfacePrefix` if you wish all `bg-X` classes to also s
 ## Why isn't the plugin called in the `plugins` array of `tailwind.config.js`?
 
 `tailwind-material-surfaces` modifies your `theme.colors` object to add the new `-hover`, `-press`, `-focus` and `-drag` colors. The Tailwind engine and any other plugins you may be using will then pick those up. Because of that, it needs to wrap your Tailwind configuration and cannot be called in the plugins array.
+
+## Helpers
+
+If for any reason you need to dynamically generate interaction colors, a `getInteractionColors` function is exported.
