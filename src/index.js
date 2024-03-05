@@ -98,8 +98,6 @@ module.exports = (options = {}) => {
           values: materialColorsObject,
         }
       );
-      // TODO call within plugins
-      // TODO readme
     }, {}),
   ];
 };
