@@ -5,10 +5,10 @@ const {
 } = require("tailwindcss/lib/util/flattenColorPalette");
 
 const DEFAULT_OPTIONS = {
-  hoverAmount: "8%",
-  pressAmount: "12%",
-  focusAmount: "12%",
-  dragAmount: "16%",
+  hoverAmount: "8",
+  pressAmount: "12",
+  focusAmount: "12",
+  dragAmount: "16",
   surfacePrefix: "surface",
   interactiveSurfacePrefix: "interactive-surface",
   draggedSurfacePrefix: "dragged-surface",

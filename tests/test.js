@@ -43,7 +43,7 @@ describe("When there are colors with a defined 'on' color", () => {
         --tw-bg-mix-opacity: 1;
         background-color: color-mix(
           var(--tw-bg-mix-method, in srgb),
-          rgb(0 0 255 / var(--tw-bg-mix-opacity)) var(--tw-bg-mix-amount, 0%),
+          rgb(0 0 255 / var(--tw-bg-mix-opacity)) calc(var(--tw-bg-mix-amount, 0) * 1%),
           var(--tw-bg-base)
         );
         transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
@@ -51,13 +51,13 @@ describe("When there are colors with a defined 'on' color", () => {
         transition-duration: 150ms
       }
       .interactive-surface-a:hover {
-        --tw-bg-mix-amount: 8%
+        --tw-bg-mix-amount: 8
       }
       .interactive-surface-a:active {
-        --tw-bg-mix-amount: 12%
+        --tw-bg-mix-amount: 12
       }
       .interactive-surface-a:focus-visible {
-        --tw-bg-mix-amount: 12%
+        --tw-bg-mix-amount: 12
       }
       .interactive-surface-a:disabled {
         color: rgb(0 0 0 / 0.38);
@@ -73,10 +73,10 @@ describe("When there are colors with a defined 'on' color", () => {
         --tw-bg-mix-opacity: 1;
         background-color: color-mix(
           var(--tw-bg-mix-method, in srgb),
-          rgb(0 0 255 / var(--tw-bg-mix-opacity)) var(--tw-bg-mix-amount, 0%),
+          rgb(0 0 255 / var(--tw-bg-mix-opacity)) calc(var(--tw-bg-mix-amount, 0) * 1%),
           var(--tw-bg-base)
         );
-        --tw-bg-mix-amount: 16%;
+        --tw-bg-mix-amount: 16;
         transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
         transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
         transition-duration: 150ms
@@ -104,10 +104,10 @@ describe("When there are colors with a defined 'on' color", () => {
         },
         plugins: [
           ...tailwindMaterialSurfaces({
-            hoverAmount: "9%",
-            pressAmount: "13%",
-            focusAmount: "13%",
-            dragAmount: "17%",
+            hoverAmount: "9",
+            pressAmount: "13",
+            focusAmount: "13",
+            dragAmount: "17",
             surfacePrefix: "bg", // bg is special because it won't re-apply bg utility
             interactiveSurfacePrefix: "ibg",
             draggedSurfacePrefix: "dbg",
@@ -142,7 +142,7 @@ describe("When there are colors with a defined 'on' color", () => {
         --tw-bg-mix-opacity: 1;
         background-color: color-mix(
           var(--tw-bg-mix-method, in srgb),
-          rgb(0 0 255 / var(--tw-bg-mix-opacity)) var(--tw-bg-mix-amount, 0%),
+          rgb(0 0 255 / var(--tw-bg-mix-opacity)) calc(var(--tw-bg-mix-amount, 0) * 1%),
           var(--tw-bg-base)
         );
         transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
@@ -150,13 +150,13 @@ describe("When there are colors with a defined 'on' color", () => {
         transition-duration: 1000ms
       }
       .ibg-a:hover {
-        --tw-bg-mix-amount: 9%
+        --tw-bg-mix-amount: 9
       }
       .ibg-a:active {
-        --tw-bg-mix-amount: 13%
+        --tw-bg-mix-amount: 13
       }
       .ibg-a:focus-visible {
-        --tw-bg-mix-amount: 13%
+        --tw-bg-mix-amount: 13
       }
       .ibg-a:disabled {
         color: rgb(0 0 0 / 0.2);
@@ -172,10 +172,10 @@ describe("When there are colors with a defined 'on' color", () => {
         --tw-bg-mix-opacity: 1;
         background-color: color-mix(
           var(--tw-bg-mix-method, in srgb),
-          rgb(0 0 255 / var(--tw-bg-mix-opacity)) var(--tw-bg-mix-amount, 0%),
+          rgb(0 0 255 / var(--tw-bg-mix-opacity)) calc(var(--tw-bg-mix-amount, 0) * 1%),
           var(--tw-bg-base)
         );
-        --tw-bg-mix-amount: 17%;
+        --tw-bg-mix-amount: 17;
         transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
         transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
         transition-duration: 1000ms

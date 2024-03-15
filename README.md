@@ -69,10 +69,10 @@ If you wish to customize the default values, you may do so by passing an object 
 ```js
   plugins: [
     ...tailwindMaterialSurfaces({
-      hoverAmount: '8%',
-      pressAmount: '12%',
-      focusAmount: '12%',
-      dragAmount: '16%',
+      hoverAmount: '8',
+      pressAmount: '12',
+      focusAmount: '12',
+      dragAmount: '16',
       surfacePrefix: "surface", // for example, change to 'sf' if you prefer shorter names
       interactiveSurfacePrefix: "interactive-surface",
       draggedSurfacePrefix: "dragged-surface",
